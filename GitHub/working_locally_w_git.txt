@@ -1,0 +1,48 @@
+/////////////////////////////////
+Working Locally with Git
+////////////////////////////////
+
+Create a local repository
+	CD to directory you want the git repo in
+	cmd> git init
+
+Adding files
+	cmd> echo "hello" > hello.txt	//Adds untracked file to directory the repo is in
+	cmd> git status			//git status tells you the status of un-committed files
+	cmd> git add hello.txt		//"tracks" file (puts it on the "staging area" to be committed)
+	cmd> touch touchcommand1.txt touchcommand2.txt //??? creates multiple files? didn't go into much detail on touch.
+	cmd> git add -A //adds all files... be careful with this because it will add all the files in the directory to the staging area.
+
+Commiting Changes
+	cmd> git commit			//opens text editor where you can leave notes on the first line about the changes you have committed
+	//If you update the file git will know that it has been changed and the updated version will come up as an untracked file
+	cmd> git add -u //adds updated files to commit staging area
+	cmd> git commit -m "updated hello.txt" //-m option allows you to make notes in-line with the command instead of opening a text editor.
+
+	//Say you make a few changes to a couple different files, you can commit those changes by only adding the files you want to commit to the staging
+	//area and then commit it.
+
+	cmd> git checkout (file name) //if you make changes you don't want to keep to a file this will return it to the last committed version.
+	cmd> git reset --hard //removes all changes you made and don't like multiple files (totally removes it doesn't bring it back to the staging aread)
+	cmd> git reset --soft (sha or HEAD~number) // goes back that many commitments and adds them to the staging area so you can get rid of bad changes.
+
+Viewing history
+	cmd> git log			//shows git commits, commit notes, and the git SHA1 ID that identifies the commit.
+
+Viewing a diff (differences between commits in history)
+	cmd> git diff (Commit SHA1)..(other commit SHA1)  // for some reason this doesn't behave the way it does in the course video... it just says there is a difference between the files..
+
+Deleting and updating files
+	cmd> rm touchcommand2.txt //deletes from directory.. git knows you did this and status will show an untracked deleted file.
+	cmd> git add -u //put the deletion in the staging area
+	cmd> git reset --hard //removes all changes you made and don't like multiple files (totally removes it doesn't bring it back to the staging aread)
+	cmd> git reset --soft (sha or HEAD~number) // goes back that many commitments and adds them to the staging area so you can get rid of bad changes.
+	cmd> git clean -n (tells you what will be deleted) -f (just deletes files in the working area)
+
+ignore files
+	//You can make a .gitignore file that lists file you don't want to commit
+	//Windows is a dipshit and doesn't let you make a .gitignore file easily.
+	//You need to do this:
+		-right click, create new file text file, name it ".gitignore." windows will remove the las period and you can edit it in notepad
+
+	cmd>

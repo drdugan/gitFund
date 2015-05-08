@@ -1,0 +1,43 @@
+//github configuration
+
+///////////////////////////////////
+CONFIGURE GIT
+///////////////////////////////////
+
+System Level Configuration
+
+	Stored in /etc/gitconfig or c:\Program Files (x86)\Git\etc\gitconfig
+	Access using:
+	>git config --system
+
+User Level Configuration
+
+	Stored in ~/.gitconfig or c:\Users\<NAME>\.gitconfig
+	Access using:
+	Cmd> git config --global
+
+Repository-level configuration (This file overrides other configurations)
+	Stored in .git/config in each repo
+	Cmd>  git config
+
+Config Command Examples:
+(Enter repo directory eg - dropbox\gitcourse)
+
+	git config --global user.name "Dugan"
+	git config --global user.email "dugan@mclanelabs.com"
+	git config --global core.editor
+		-This is a pain in the ass for windows.  You need to write a batch file that tells git to open notebook++ as a core editor.
+		 Instructions: https://danlimerick.wordpress.com/2011/06/12/git-for-windows-tip-setting-an-editor/
+
+	git config --global help.autocorrect 1
+	git config --global color.ui auto
+	git config --global core.autocrlf
+			true : converts crlf to only lf of text files when you post to git and put them back when you pull them off. (windows cross platform development)
+			false : do nothing to the text files (windows only dev)
+			input : convert crlf on the way to repo but don't put them back (mac linux)
+
+	git config --global core.pager cat //this avoids the annoying vi problems I ran into while doing a long git log (got stuck in vi)
+	git config --global --list (show the config)
+	cat ~/.gitconfig
+
+	git config --global --unset user.name removes configuration field from config file. Or you could edit the file in an editor.

@@ -1,0 +1,209 @@
+GitHub Fundamentals
+3/27/2015
+
+Version Control Systems 
+
+	Article on V.C.S History:
+
+	www.ericsink.com/vcbe/html/history_of_version_control.html 
+
+	Old Systems 
+		SCCS, RCS 
+		No Networking 
+	Second Generation 
+		Centralizeds V.C. 
+		Muliti File 
+		EG cvs vss svn tfs perforce 
+	Third Generation 
+		Distributed V.C. System (DVCS)
+		Changesets 
+		Distributed 
+		EG git, hg, bazaar, bitkeeper 
+
+Advantages of DVCS (DVCS - Distributed Version Control System.)
+	
+	Different Topologies 
+		
+		Centralized -	Developers push changes to one central repository 
+		
+		Hierarchical -	Developers push changes to subsystem-based repositories.
+				Sub-system repositories are periodically merged into a main repository. 
+				(Done with linux kernal development.  Linux kernal is so large that
+				there are different sub-systems for graphics, networking... etc.. 
+				periodically merged into a main repository)
+
+		Distributed  -	Developers push changes to their own repositories and the project managers
+				pull changes into the official repository if they are deemed valuable. 
+				Very common on open source projects on github where if you want to make changes 
+				you can fork the main repository, make your changes, then issue a "pullcrit"(?) 
+				request to the project manager 
+
+	Backups are easy 
+
+		-Backup is simply a clone of the repository. 
+		
+
+
+	Reliable branching and merging 
+		
+		Feature branches -	fixing a bug or adding a feature create a seperate branch and when passed tesing 
+					merge it into your main line of work. Allows you to work under version control 
+					apply changes locally but maintain stable "roll back points" 
+
+		Applying fixes to different branches is easy... 
+
+
+
+	Full Local History 
+
+		Compute Repository Statistics - //???
+
+		Analyze Regressions - Bisect command : search for when a bug was introduced. 
+ 
+			A software regression is a software bug which makes a feature stop functioning 
+			as intended after a certain event (for example, a system upgrade, system patching 
+			or a change to daylight saving time).[1] A software performance regression is a 
+			situation where the software still functions correctly, but performs slowly or uses 
+			more memory when compared to previous versions.
+
+			Regressions are often caused by encompassed bug fixes included in software patches. 
+			One approach to avoiding this kind of problem is regression testing. A properly designed 
+			test plan prevents this possibility before releasing any software.[2] Automated testing 
+			and well-written test cases can reduce the likelihood of a regression.
+
+			A software regression can be of one of three types:[citation needed]
+
+			Local – a change introduces a new bug in the changed module or component.
+			Remote – a change in one part of the software breaks functionality in another module or component.
+			Unmasked – a change unmasks an already existing bug that had no effect before the change.
+
+	
+	About Git 
+		Created by Linus Torvalds (linux creator) 
+
+///////////////////////////////////////////////////////
+
+Create Git Repository 
+	CD to the directory you want to put it in 
+	
+	>init git
+	
+///////////////////////////////////
+CONFIGURE GIT
+///////////////////////////////////
+
+System Level Configuration 
+	
+	Stored in /etc/gitconfig or c:\Program Files (x86)\Git\etc\gitconfig
+	Access using: 
+	>git config --system 
+
+User Level Configuration 
+	
+	Stored in ~/.gitconfig or c:\Users\<NAME>\.gitconfig
+	Access using: 
+	Cmd> git config --global 
+
+Repository-level configuration (This file overrides other configurations)
+	Stored in .git/config in each repo
+	Cmd>  git config
+
+Config Command Examples: 
+(Enter repo directory eg - dropbox\gitcourse)
+
+	git config --global user.name "Dugan"
+	git config --global user.email "dugan@mclanelabs.com"
+	git config --global core.editor 
+		-This is a pain in the ass for windows.  You need to write a batch file that tells git to open notebook++ as a core editor. 
+		 Instructions: https://danlimerick.wordpress.com/2011/06/12/git-for-windows-tip-setting-an-editor/
+		
+	git config --global help.autocorrect 1
+	git config --global color.ui auto
+	git config --global core.autocrlf 
+			true : converts crlf to only lf of text files when you post to git and put them back when you pull them off. (windows cross platform development)
+			false : do nothing to the text files (windows only dev)
+			input : convert crlf on the way to repo but don't put them back (mac linux) 
+	
+	git config --global core.pager cat //this avoids the annoying vi problems I ran into while doing a long git log (got stuck in vi) 
+	git config --global --list (show the config)
+	cat ~/.gitconfig
+
+	git config --global --unset user.name removes configuration field from config file. Or you could edit the file in an editor. 
+
+
+/////////////////////////////////
+Working Locally with Git
+////////////////////////////////
+
+Create a local repository 
+	CD to directory you want the git repo in 
+	cmd> git init 
+
+Adding files
+	cmd> echo "hello" > hello.txt	//Adds untracked file to directory the repo is in 
+	cmd> git status			//git status tells you the status of un-committed files 
+	cmd> git add hello.txt		//"tracks" file (puts it on the "staging area" to be committed) 
+	cmd> touch touchcommand1.txt touchcommand2.txt //??? creates multiple files? didn't go into much detail on touch. 
+	cmd> git add -A //adds all files... be careful with this because it will add all the files in the directory to the staging area. 	
+
+Commiting Changes 
+	cmd> git commit			//opens text editor where you can leave notes on the first line about the changes you have committed 
+	//If you update the file git will know that it has been changed and the updated version will come up as an untracked file 
+	cmd> git add -u //adds updated files to commit staging area 
+	cmd> git commit -m "updated hello.txt" //-m option allows you to make notes in-line with the command instead of opening a text editor.
+
+	//Say you make a few changes to a couple different files, you can commit those changes by only adding the files you want to commit to the staging
+	//area and then commit it. 
+	
+	cmd> git checkout (file name) //if you make changes you don't want to keep to a file this will return it to the last committed version. 
+	cmd> git reset --hard //removes all changes you made and don't like multiple files (totally removes it doesn't bring it back to the staging aread) 
+	cmd> git reset --soft (sha or HEAD~number) // goes back that many commitments and adds them to the staging area so you can get rid of bad changes. 
+
+Viewing history 
+	cmd> git log			//shows git commits, commit notes, and the git SHA1 ID that identifies the commit.  
+
+Viewing a diff (differences between commits in history)
+	cmd> git diff (Commit SHA1)..(other commit SHA1)  // for some reason this doesn't behave the way it does in the course video... it just says there is a difference between the files.. 
+
+Deleting and updating files 
+	cmd> rm touchcommand2.txt //deletes from directory.. git knows you did this and status will show an untracked deleted file. 
+	cmd> git add -u //put the deletion in the staging area 
+	cmd> git reset --hard //removes all changes you made and don't like multiple files (totally removes it doesn't bring it back to the staging aread) 
+	cmd> git reset --soft (sha or HEAD~number) // goes back that many commitments and adds them to the staging area so you can get rid of bad changes. 
+	cmd> git clean -n (tells you what will be deleted) -f (just deletes files in the working area) 
+
+ignore files 
+	//You can make a .gitignore file that lists file you don't want to commit 
+	//Windows is a dipshit and doesn't let you make a .gitignore file easily.  
+	//You need to do this:
+		-right click, create new file text file, name it ".gitignore." windows will remove the las period and you can edit it in notepad  
+
+	cmd> 
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
