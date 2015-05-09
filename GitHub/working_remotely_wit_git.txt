@@ -1,0 +1,48 @@
+//working remotely wit git
+
+//clone repo into your directory
+$ doug@ubuntu-thinkpad:~/Documents/PluralSight.com Classes$ git clone https://github.com/jquery/jquery.git
+
+//check the repos commit history
+$ git log
+$ git log --oneline
+$ git log --oneline | wc -l // | wc -l is using the word count function to count lines (commit/line tells us how many commits)
+$ git log --oneline --graph //shows visual representation of forks branches and merges
+$ git shortlog //authors and commit message from all commits and amount of commits author has done
+
+$ git show HEAD //Shows ALL the changes in the last commit
+$ git show HEAD ~1 //Shows all the changes commit before last
+$ git show [HASH#]
+$ git remote //shows where code came from
+$ git remote -v //verbose shows the fetch and pull locations and protocol
+
+//Branches
+//Branches are used as a temporary working copy
+
+$ git branch //shows branches on your clone
+$ git branch -r //shows different branches on the remote that are shared
+
+//Tags
+$ git tag //known stable points (versions revisions)
+
+
+Protocols for working remotely
+  https 80/443 rw password firewall friendly
+  git 9418  r anonymous only (odd port for firewalls)
+  ssh 22 example: git@github.com:jquery/jquery.git  rw ssh key authentication
+  local files (git repos on your computer) /User/David/repo
+
+  //add a remote to local repo
+  $ git remote add origin https://github.comdrdugan/gitFund.git
+
+  //fetch push
+  $ git remote fetch //download check for changes
+  //Multiple remotes? specify
+  $ git remote fetch origin
+  $ git push -u origin master //push to remote repo
+  $ git log origin/master //shows the remote repos log
+  $ git merge origin/master //merge with remote //??? how is this different than just cloning the repo?
+  //pull
+  $git pull // does git fetch + git merge (grabs latest from remote)
+  $git branch --set-upstream
+  $git branch --set-upstream master origin/master
