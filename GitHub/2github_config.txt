@@ -29,6 +29,10 @@ Config Command Examples:
 		-This is a pain in the ass for windows.  You need to write a batch file that tells git to open notebook++ as a core editor.
 		 Instructions: https://danlimerick.wordpress.com/2011/06/12/git-for-windows-tip-setting-an-editor/
 
+	Ubuntu
+		git config --global core.editor "atom --wait"
+
+
 	git config --global help.autocorrect 1
 	git config --global color.ui auto
 	git config --global core.autocrlf
