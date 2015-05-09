@@ -1,0 +1,21 @@
+
+
+$ git log --graph --oneline --all --decorate  //shows all commits with graph, commit message, and tags
+$ git config --global alias.detailedLog "log --graph --oneline --decorate" //makes a nickname for that command
+
+$git branch feature1
+$git checkout feature1
+//i added a file called feature1.txt when I commit the file the feature one branch moves up to the next commit
+//So does HEAD
+//because the change was made on that branch.
+//branches are labels for commits shas and move with changes
+//tags stay in place
+
+//checkout a branch
+git checkout master
+
+//now that the change is on that branch if I switch back to the origin branch and do a git log
+//HEAD will be back down at the previous commit before the branch and won't include the change made in feature1 branch
+
+//rename a branch
+git branch -m oldname newname
