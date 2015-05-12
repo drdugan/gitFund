@@ -15,10 +15,21 @@ $git checkout feature1 //check it out from the repo to work on it.
 //tags stay in place and are just a bookmark to a commit.
 
 //checkout a branch
-git checkout master
+$git checkout master
 
 //now that the change is on that branch if I switch back to the origin branch and do a git log
 //HEAD will be back down at the previous commit before the branch and won't include the change made in feature1 branch
 
 //rename a branch
-git branch -m oldname newname //rename a branch with the move argument.
+$git branch -m oldname newname //rename a branch with the move argument.
+
+//delete a branch
+
+$ git branch -d feature1
+
+//if a branch hasn't been merged git will stop you from doing this with this error message:
+  error: The branch 'feature1' is not fully merged.
+  If you are sure you want to delete it, run 'git branch -D feature1'.
+
+//force a delete
+$git branch -D feature1
