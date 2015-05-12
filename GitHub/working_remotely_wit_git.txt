@@ -23,7 +23,12 @@ $ git branch //shows branches on your clone
 $ git branch -r //shows different branches on the remote that are shared
 
 //Tags
-$ git tag //known stable points (versions revisions)
+$ git tag thisIsATag//known stable points (versions revisions)
+$ git tag -a tag_with_message //makes a tag with a message
+$ git tag -v [tagname] //verifies tag? not sure why I care.
+//push tag to remote... doesn't by default.
+git push --tags
+
 
 
 Protocols for working remotely
@@ -37,12 +42,20 @@ Protocols for working remotely
 
   //fetch push
   $ git remote fetch //download check for changes
-  //Multiple remotes? specify
+
+  //Multiple remotes (branches)? specify
   $ git remote fetch origin
+
   $ git push -u origin master //push to remote repo
+
   $ git log origin/master //shows the remote repos log
+
   $ git merge origin/master //merge with remote //??? how is this different than just cloning the repo?
   //pull
   $git pull // does git fetch + git merge (grabs latest from remote)
   $git branch --set-upstream
   $git branch --set-upstream master origin/master
+
+  //Set up ssh
+  //You need to set up an ssh key and register it with github.
+  https://help.github.com/articles/generating-ssh-keys/
