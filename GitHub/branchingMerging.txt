@@ -45,3 +45,8 @@ $git reflog
 
 //git stash
 //hide branches and files from the staging area
+$git stash //stashes the current branch so that you can push other changes
+$git stash apply // brings the stashed branch back to current working area
+$git stash pop // does the same as above but deletes from the list
+$git stash dump // gets rid of the stash(latest)
+$git stash list //list of different stashed branches
